@@ -582,9 +582,9 @@
         </div>
       </div>
       <div style="display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; margin:2rem 0;">
-        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-strawberry"></i> strawberry mint cooler</div>
-        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-peach"></i> peach basil smash</div>
-        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-lemon"></i> lemon thyme spritzer</div>
+        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-strawberry"></i> Ginger juice🥤</div>
+        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-peach"></i> zobo</div>
+        <div style="background: rgba(255,230,210,0.7); backdrop-filter: blur(6px); border-radius: 100px; padding: 1rem 2rem;"><i class="fas fa-lemon"></i> yogofura</div>
       </div>
     </section>
 
@@ -666,7 +666,7 @@
     </div>
 
     <footer class="footer fade-up">
-      <div>© 2025 Sip & Munch – fruity since day one</div>
+      <div>© 2026 Sip & Munch – fruity since day one</div>
       <div class="footer-links">
         <i class="fab fa-instagram"></i>
         <i class="fab fa-facebook"></i>
@@ -678,23 +678,27 @@
   <script>
     (function() {
       // ---------- MENU DATA ----------
-      const drinks = [
-        { id: 'd1', name: 'Iced Latte', description: 'Double espresso, oat milk, agave', price: 4.75, icon: 'fa-coffee' },
-        { id: 'd2', name: 'Matcha Lemonade', description: 'Matcha, lemon, mint', price: 5.25, icon: 'fa-leaf' },
-        { id: 'd3', name: 'Spiced Chai', description: 'Cardamom & cinnamon', price: 4.50, icon: 'fa-mug-hot' },
-        { id: 'd4', name: 'Berry Smoothie', description: 'Banana, berries, almond milk', price: 6.25, icon: 'fa-blender' },
-        { id: 'd5', name: 'Watermelon Fresca', description: 'Fresh lime, mint, agave', price: 5.50, icon: 'fa-water' }
-      ];
+// ---------- MENU DATA ----------
+const drinks = [
+  { id: 'd1', name: 'Orange Juice', description: '100% fresh orange fruit', price: 4.75, icon: 'fa-glass-citrus' },
+  { id: 'd2', name: 'Matcha Lemonade', description: 'Matcha, lemon, mint', price: 5.25, icon: 'fa-leaf' },
+  { id: 'd3', name: 'Pineapple Juice', description: 'Fresh pineapple blend', price: 4.50, icon: 'fa-pineapple' },
+  { id: 'd4', name: 'Berry Smoothie', description: 'Banana, berries, almond milk', price: 6.25, icon: 'fa-blender' },
+  { id: 'd5', name: 'Watermelon Fresca', description: 'Fresh lime, mint, agave', price: 5.50, icon: 'fa-water' },
+  { id: 'd6', name: 'Zobo Drink', description: 'Hibiscus, ginger, cloves', price: 5.50, icon: 'fa-wine-bottle' },
+  { id: 'd7', name: 'Chapman', description: 'Fruit cocktail, grenadine', price: 5.50, icon: 'fa-cocktail' },
+];
 
-      const food = [
-        { id: 'f1', name: 'Avocado Toast', description: 'Sourdough, chili, lime', price: 7.90, icon: 'fa-bread-slice' },
-        { id: 'f2', name: 'Hummus Bowl', description: 'Red pepper hummus, veggies, pita', price: 6.80, icon: 'fa-utensils' },
-        { id: 'f3', name: 'Turkey Club', description: 'Turkey, bacon, aioli', price: 8.50, icon: 'fa-sandwich' },
-        { id: 'f4', name: 'Caprese Skewers', description: 'Mozzarella, tomato, basil', price: 5.95, icon: 'fa-cheese' },
-        { id: 'f5', name: 'Fruit & Cheese', description: 'Grapes, apple, brie, crackers', price: 7.25, icon: 'fa-apple-alt' }
-      ];
+const food = [
+  { id: 'f1', name: 'Egg Roll', description: 'Savory egg wrapped in flour', price: 7.90, icon: 'fa-egg' },
+  { id: 'f2', name: 'Meat Pie', description: 'Flaky pastry with minced meat', price: 6.80, icon: 'fa-pie' },
+  { id: 'f3', name: 'Puff-Puff', description: 'Deep-fried dough balls', price: 8.50, icon: 'fa-donut' },
+  { id: 'f4', name: 'Chin-Chin', description: 'Crunchy fried dough snacks', price: 5.95, icon: 'fa-cookie' },
+  { id: 'f5', name: 'Fruit & Cheese', description: 'Grapes, apple, brie, crackers', price: 7.25, icon: 'fa-apple-alt' },
+  { id: 'f6', name: 'Small Chops', description: 'Assorted Nigerian finger food', price: 7.25, icon: 'fa-utensils' }
+];
 
-      const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map(f => ({ ...f, type: 'food' }))];
+const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map(f => ({ ...f, type: 'food' }))];
 
       let selectedIds = new Set();
 
