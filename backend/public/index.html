@@ -26,14 +26,103 @@
       overflow-x: hidden;
     }
 
-    /* ---------- 3D fruit floating background ---------- */
-    body::before {
-      content: "";
+    /* ---------- 🌟 FACEBOOK-STYLE LOADER (CLEAN, MINIMAL, 3 DOTS) ---------- */
+    #loader-wrapper {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff3e9;  /* warm background to keep fruit vibe */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.4s ease-out, visibility 0.4s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    #loader-wrapper.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .facebook-loader {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.2rem 2.5rem;
+      border-radius: 60px;
+      box-shadow: 0 15px 30px rgba(183, 110, 60, 0.2), 0 0 0 2px rgba(255,215,175,0.5);
+      border: 1px solid #ffdcc0;
+    }
+
+    .facebook-loader .dot {
+      width: 16px;
+      height: 16px;
+      background: #b76e3c;        /* primary fruit brown */
+      border-radius: 50%;
+      display: inline-block;
+      animation: facebookPop 1.4s infinite ease-in-out both;
+      box-shadow: 0 0 12px #fba76f;
+    }
+
+    .facebook-loader .dot:nth-child(1) {
+      animation-delay: -0.32s;
+      background: #b76e3c;
+    }
+    .facebook-loader .dot:nth-child(2) {
+      animation-delay: -0.16s;
+      background: #c97e49;
+    }
+    .facebook-loader .dot:nth-child(3) {
+      animation-delay: 0s;
+      background: #e09c62;
+    }
+
+    @keyframes facebookPop {
+      0%, 80%, 100% { 
+        transform: scale(0.6);
+        opacity: 0.5;
+      }
+      40% { 
+        transform: scale(1.2);
+        opacity: 1;
+        background: #f7b731;  /* brighter pop */
+      }
+    }
+
+    .loader-text-fb {
+      margin-left: 0.5rem;
+      font-weight: 500;
+      color: #6b4226;
+      letter-spacing: 0.5px;
+      font-size: 1.2rem;
+    }
+
+    .loader-text-fb i {
+      color: #b76e3c;
+      margin-right: 6px;
+    }
+
+    /* ---------- PARALLAX 3D BACKGROUND ---------- */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.2;
+      opacity: 0.25;
+      transform: translateZ(0);
+      will-change: transform;
+      transition: transform 0.05s linear;
       background-image: 
         radial-gradient(circle at 10% 20%, #ffb87c 2%, transparent 3%),
         radial-gradient(circle at 95% 70%, #f39c12 3%, transparent 4%),
@@ -43,17 +132,10 @@
         radial-gradient(circle at 80% 55%, #f1c40f 3.5%, transparent 4.5%),
         radial-gradient(circle at 5% 45%, #27ae60 2.2%, transparent 3.5%),
         radial-gradient(circle at 55% 90%, #2ecc71 2.8%, transparent 4%),
-        repeating-linear-gradient(45deg, rgba(255,215,150,0.1) 0px, rgba(255,215,150,0.1) 20px, transparent 20px, transparent 40px);
+        repeating-linear-gradient(45deg, rgba(255,215,150,0.15) 0px, rgba(255,215,150,0.15) 20px, transparent 20px, transparent 40px);
       background-size: 300px 300px, 200px 200px, 180px 180px, 250px 250px, 220px 220px, 280px 280px, 190px 190px, 240px 240px, auto;
-      animation: fruityDrift 70s linear infinite;
       filter: drop-shadow(0 0 6px rgba(255,140,0,0.3));
       transform-style: preserve-3d;
-      perspective: 800px;
-    }
-
-    @keyframes fruityDrift {
-      0% { background-position: 0 0, 10px 10px, 200px 30px, 50px 200px, 400px 100px, 600px 50px, 800px 300px, 150px 500px, 0 0; }
-      100% { background-position: 400px 400px, 210px 210px, 500px 330px, 350px 500px, 700px 400px, 900px 350px, 1100px 600px, 450px 800px, 0 0; }
     }
 
     /* main content layer */
@@ -549,11 +631,71 @@
       margin-top: 1rem;
       font-size: 0.9rem;
     }
+
+    /* ---------- ORDER ON ITS WAY MESSAGE ---------- */
+    .order-way-message {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: linear-gradient(145deg, #2e7d32, #1e5f24);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      box-shadow: 0 30px 40px -10px #1e5f24, 0 0 0 4px #ffd54f;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      border: 2px solid #ffb74d;
+    }
+
+    .order-way-message.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+      pointer-events: none;
+    }
+
+    .order-way-message i {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 4px 6px #b9f6ca);
+      animation: ringTruck 1.2s infinite alternate;
+    }
+
+    @keyframes ringTruck {
+      0% { transform: rotate(-5deg) scale(1); }
+      100% { transform: rotate(5deg) scale(1.1); }
+    }
   </style>
 </head>
 <body>
-  <div class="page-content">
+  <!-- FACEBOOK-STYLE LOADER (minimal 3-dot pop) -->
+  <div id="loader-wrapper">
+    <div class="facebook-loader">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="loader-text-fb"><i class="fas fa-lemon"></i> Sip & Munch · loading</span>
+    </div>
+  </div>
 
+  <!-- Parallax background layer (moves with scroll) -->
+  <div class="parallax-bg" id="parallaxBg"></div>
+
+  <!-- ON ITS WAY MESSAGE (hidden by default) -->
+  <div id="orderWayMessage" class="order-way-message">
+    <i class="fas fa-truck"></i>
+    <span>Your order is on its way! 🍉</span>
+    <i class="fas fa-smile-wink"></i>
+  </div>
+
+  <div class="page-content">
     <!-- navbar -->
     <nav class="navbar fade-up">
       <div class="logo">
@@ -640,13 +782,9 @@
         <span class="close-modal" id="closeModal">&times;</span>
         <h2><i class="fas fa-shopping-cart" style="color:#b76e3c;"></i> Your Order</h2>
         
-        <div class="order-summary-items" id="orderSummaryItems">
-          <!-- Will be populated by JavaScript -->
-        </div>
+        <div class="order-summary-items" id="orderSummaryItems"></div>
         
-        <div class="order-total" id="orderTotal">
-          Total: $0.00
-        </div>
+        <div class="order-total" id="orderTotal">Total: ₦0.00</div>
 
         <div class="google-form-note">
           <p><i class="fas fa-info-circle"></i> To place your order:</p>
@@ -677,28 +815,41 @@
 
   <script>
     (function() {
-      // ---------- MENU DATA ----------
-// ---------- MENU DATA ----------
-const drinks = [
-  { id: 'd1', name: 'Orange Juice', description: '100% fresh orange fruit', price: 4.75, icon: 'fa-glass-citrus' },
-  { id: 'd2', name: 'Matcha Lemonade', description: 'Matcha, lemon, mint', price: 5.25, icon: 'fa-leaf' },
-  { id: 'd3', name: 'Pineapple Juice', description: 'Fresh pineapple blend', price: 4.50, icon: 'fa-pineapple' },
-  { id: 'd4', name: 'Berry Smoothie', description: 'Banana, berries, almond milk', price: 6.25, icon: 'fa-blender' },
-  { id: 'd5', name: 'Watermelon Fresca', description: 'Fresh lime, mint, agave', price: 5.50, icon: 'fa-water' },
-  { id: 'd6', name: 'Zobo Drink', description: 'Hibiscus, ginger, cloves', price: 5.50, icon: 'fa-wine-bottle' },
-  { id: 'd7', name: 'Chapman', description: 'Fruit cocktail, grenadine', price: 5.50, icon: 'fa-cocktail' },
-];
+      // Hide loader after page load
+      window.addEventListener('load', function() {
+        setTimeout(() => {
+          document.getElementById('loader-wrapper').classList.add('loaded');
+        }, 800);  // keep smoothness
+      });
 
-const food = [
-  { id: 'f1', name: 'Egg Roll', description: 'Savory egg wrapped in flour', price: 7.90, icon: 'fa-egg' },
-  { id: 'f2', name: 'Meat Pie', description: 'Flaky pastry with minced meat', price: 6.80, icon: 'fa-pie' },
-  { id: 'f3', name: 'Puff-Puff', description: 'Deep-fried dough balls', price: 8.50, icon: 'fa-donut' },
-  { id: 'f4', name: 'Chin-Chin', description: 'Crunchy fried dough snacks', price: 5.95, icon: 'fa-cookie' },
-  { id: 'f5', name: 'Fruit & Cheese', description: 'Grapes, apple, brie, crackers', price: 7.25, icon: 'fa-apple-alt' },
-  { id: 'f6', name: 'Small Chops', description: 'Assorted Nigerian finger food', price: 7.25, icon: 'fa-utensils' }
-];
+      // PARALLAX SCROLL EFFECT
+      const parallax = document.getElementById('parallaxBg');
+      window.addEventListener('scroll', function() {
+        let scrollY = window.scrollY;
+        parallax.style.transform = `translateY(${scrollY * 0.3}px)`;
+      });
 
-const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map(f => ({ ...f, type: 'food' }))];
+      // ---------- MENU DATA (prices in ₦, Nigerian Naira) ----------
+      const drinks = [
+        { id: 'd1', name: 'Orange Juice', description: '100% fresh orange fruit', price: 4750, icon: 'fa-glass-citrus' },
+        { id: 'd2', name: 'Matcha Lemonade', description: 'Matcha, lemon, mint', price: 5250, icon: 'fa-leaf' },
+        { id: 'd3', name: 'Pineapple Juice', description: 'Fresh pineapple blend', price: 4500, icon: 'fa-pineapple' },
+        { id: 'd4', name: 'Berry Smoothie', description: 'Banana, berries, almond milk', price: 6250, icon: 'fa-blender' },
+        { id: 'd5', name: 'Watermelon Fresca', description: 'Fresh lime, mint, agave', price: 5500, icon: 'fa-water' },
+        { id: 'd6', name: 'Zobo Drink', description: 'Hibiscus, ginger, cloves', price: 5500, icon: 'fa-wine-bottle' },
+        { id: 'd7', name: 'Chapman', description: 'Fruit cocktail, grenadine', price: 5500, icon: 'fa-cocktail' },
+      ];
+
+      const food = [
+        { id: 'f1', name: 'Egg Roll', description: 'Savory egg wrapped in flour', price: 7900, icon: 'fa-egg' },
+        { id: 'f2', name: 'Meat Pie', description: 'Flaky pastry with minced meat', price: 6800, icon: 'fa-pie' },
+        { id: 'f3', name: 'Puff-Puff', description: 'Deep-fried dough balls', price: 8500, icon: 'fa-donut' },
+        { id: 'f4', name: 'Chin-Chin', description: 'Crunchy fried dough snacks', price: 5950, icon: 'fa-cookie' },
+        { id: 'f5', name: 'Fruit & Cheese', description: 'Grapes, apple, brie, crackers', price: 7250, icon: 'fa-apple-alt' },
+        { id: 'f6', name: 'Small Chops', description: 'Assorted Nigerian finger food', price: 7250, icon: 'fa-utensils' }
+      ];
+
+      const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map(f => ({ ...f, type: 'food' }))];
 
       let selectedIds = new Set();
 
@@ -713,6 +864,7 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
       const openGoogleFormBtn = document.getElementById('openGoogleFormBtn');
       const orderSummaryItems = document.getElementById('orderSummaryItems');
       const orderTotal = document.getElementById('orderTotal');
+      const orderWayMsg = document.getElementById('orderWayMessage');
 
       // Render all menu items
       function renderAllMenus() {
@@ -735,7 +887,8 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
         const iconHtml = `<div class="card-icon"><i class="fas ${item.icon}"></i></div>`;
         const titleHtml = `<h3>${item.name}</h3>`;
         const descHtml = `<div class="menu-desc">${item.description}</div>`;
-        const priceHtml = `<div class="price">$${item.price.toFixed(2)}</div>`;
+        // Use ₦ symbol and format price with commas (simple)
+        const priceHtml = `<div class="price">₦${item.price.toLocaleString()}</div>`;
 
         const selectBtn = document.createElement('div');
         selectBtn.className = `select-btn ${selectedIds.has(item.id) ? 'selected' : ''}`;
@@ -767,7 +920,6 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
           selectedIds.add(itemId);
         }
 
-        // Update all buttons with that id
         document.querySelectorAll(`.select-btn[data-id="${itemId}"]`).forEach(btn => {
           const isSelected = selectedIds.has(itemId);
           btn.innerHTML = isSelected ? '✓' : '+';
@@ -789,7 +941,6 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
         });
         selectedContainer.innerHTML = html;
         
-        // Add click handlers for remove icons
         document.querySelectorAll('.selected-tag i.fa-times-circle').forEach(icon => {
           icon.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -806,53 +957,44 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
         });
       }
 
-      // Calculate total
       function calculateTotal() {
         const selectedItems = allMenuItems.filter(item => selectedIds.has(item.id));
         return selectedItems.reduce((sum, item) => sum + item.price, 0);
       }
 
-      // Format order details for copying
       function formatOrderDetails() {
         const selectedItems = allMenuItems.filter(item => selectedIds.has(item.id));
-        if (selectedItems.length === 0) {
-          return "No items selected";
-        }
-        
+        if (selectedItems.length === 0) return "No items selected";
         let details = "Sip & Munch Order:\n\n";
         selectedItems.forEach(item => {
-          details += `${item.name} - $${item.price.toFixed(2)}\n`;
+          details += `${item.name} - ₦${item.price.toLocaleString()}\n`;
         });
-        details += `\nTotal: $${calculateTotal().toFixed(2)}`;
+        details += `\nTotal: ₦${calculateTotal().toLocaleString()}`;
         return details;
       }
 
-      // Show order modal
       function showOrderModal() {
         const selectedItems = allMenuItems.filter(item => selectedIds.has(item.id));
-        
         if (selectedItems.length === 0) {
           alert('Please select some items first!');
           return;
         }
 
-        // Populate modal
         let itemsHtml = '';
         selectedItems.forEach(item => {
           itemsHtml += `
             <div class="order-summary-item">
               <span>${item.name}</span>
-              <span>$${item.price.toFixed(2)}</span>
+              <span>₦${item.price.toLocaleString()}</span>
             </div>
           `;
         });
         
         orderSummaryItems.innerHTML = itemsHtml;
-        orderTotal.textContent = `Total: $${calculateTotal().toFixed(2)}`;
+        orderTotal.textContent = `Total: ₦${calculateTotal().toLocaleString()}`;
         orderModal.classList.add('active');
       }
 
-      // Copy order to clipboard
       function copyOrderToClipboard() {
         const orderDetails = formatOrderDetails();
         navigator.clipboard.writeText(orderDetails).then(() => {
@@ -862,38 +1004,37 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
         });
       }
 
-      // Open Google Form
-      function openGoogleForm() {
-  const selectedItems = allMenuItems.filter(item => selectedIds.has(item.id));
-  if (selectedItems.length === 0) {
-    alert('Please select some items first!');
-    return;
-  }
+      // Show "on its way" message for 3 seconds
+      function showOrderOnItsWay() {
+        orderWayMsg.classList.add('show');
+        setTimeout(() => {
+          orderWayMsg.classList.remove('show');
+        }, 3200);
+      }
 
-  // Format order for Google Form - create a readable order summary
-  const orderText = selectedItems.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('\n');
-  const total = calculateTotal().toFixed(2);
-  const message = `ORDER:\n${orderText}\n\nTOTAL: $${total}`;
-  
-  // Base Google Form URL
-  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfHBABd1Tjm7ye2cNeqU3_cjjTklQcJ8Nl091oNuQpMYsCmHw/viewform';
-  
-  // You need to identify the correct entry ID for the order field
-  // Looking at your prefilled URL, the entry for order is: entry.241662724
-  const ORDER_ENTRY_ID = 'entry.241662724'; // This is the "Paste order here" field
-  const NAME_ENTRY_ID = 'entry.303407432';  // Name field
-  const PHONE_ENTRY_ID = 'entry.69144959';   // Phone field
-  const LOCATION_ENTRY_ID = 'entry.452904645'; // Location field
-  
-  // For now, let's just open the form and show the order in an alert
-  // so the user can copy it manually
-  window.open(baseUrl, '_blank');
-  
-  // Show the order details for the user to copy
-  setTimeout(() => {
-    alert('Please copy this order and paste it in the "Paste order here" field:\n\n' + message);
-  }, 1000);
-}
+      // Open Google Form + trigger the "on its way" message
+      function openGoogleFormAndConfirm() {
+        const selectedItems = allMenuItems.filter(item => selectedIds.has(item.id));
+        if (selectedItems.length === 0) {
+          alert('Please select some items first!');
+          return;
+        }
+
+        const orderText = selectedItems.map(item => `${item.name} - ₦${item.price.toLocaleString()}`).join('\n');
+        const total = calculateTotal().toLocaleString();
+        const message = `ORDER:\n${orderText}\n\nTOTAL: ₦${total}`;
+        
+        const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfHBABd1Tjm7ye2cNeqU3_cjjTklQcJ8Nl091oNuQpMYsCmHw/viewform';
+        window.open(baseUrl, '_blank');
+        
+        // Show the confirmation message (order is on its way)
+        setTimeout(() => {
+          alert('Please copy this order and paste it in the "Paste order here" field:\n\n' + message);
+        }, 800);
+
+        // SHOW THE FANCY "ON ITS WAY" MESSAGE (simulates order submitted)
+        showOrderOnItsWay();
+      }
 
       // Page switching
       const homePage = document.getElementById('homePage');
@@ -923,7 +1064,6 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
         }
       }
 
-      // Event Listeners
       tabHome.addEventListener('click', () => setActivePage('home'));
       tabMenu.addEventListener('click', () => setActivePage('menu'));
       tabAbout.addEventListener('click', () => setActivePage('about'));
@@ -942,17 +1082,16 @@ const allMenuItems = [...drinks.map(d => ({ ...d, type: 'drink' })), ...food.map
       });
 
       copyOrderBtn.addEventListener('click', copyOrderToClipboard);
-      openGoogleFormBtn.addEventListener('click', openGoogleForm);
+      openGoogleFormBtn.addEventListener('click', openGoogleFormAndConfirm);
 
-      // Initial render
       renderAllMenus();
       updateSelectedList();
     })();
   </script>
 
-  <!-- Instructions -->
+  <!-- tiny instruction note (still here) -->
   <div style="position: relative; z-index: 100; background: #ffe9d6; padding: 0.5rem; text-align: center; font-size: 0.8rem; border-top: 2px solid #b76e3c;">
-    🍒 About page fixed • Click "review order" to see your selections • Copy order details and paste in Google Form
+    🍒 New Facebook‑style loader (clean 3‑dot pop) • Click "review order" to see your selections • Copy order details and paste in Google Form • After form click, you get "order on its way" message! • <strong>Now all prices are in ₦</strong>
   </div>
 </body>
 </html>
